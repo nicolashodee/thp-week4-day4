@@ -1,5 +1,7 @@
 # The Hacking Project
-## Project :
+## Project : Tic_Tac_Toe
+
+Made by Aurore CARRIERE et Nicolas HODEE
 
 ### Installation
 
@@ -14,5 +16,15 @@ Then, you can :
 
 ### Presentation
 
+C'est un Morpion, je pense que vous n'avez pas besoin de beaucoup d'explications..
+A vous de jouer !
+Il vous suffit de rentrer le nom des 2 joueurs et de vous affronter en duel !
+
 ### Conduct
 
+Pour lancer le jeu, ouvrez votre terminal et lancer l'application morpion grâce à :
+ruby morpion.rb
+
+
+
+PS : Le premier joueur sera toujours le gagnant, sauf en cas de match nul (nous n'avons pas encore trouvé la solution à ce léger souci)

@@ -6,16 +6,12 @@ require_relative 'lib/views/boardcase'
 require_relative 'lib/app/game'
 require_relative 'lib/app/player'
 
-
+puts "*" * 51
+puts "\n   BIENVENUE DANS NOTRE SUPER JEU DE MORPION !!!\n\n"
+puts "*" * 51
 
 my_morpion = Game.new
 my_morpion.ask_name
 my_morpion.turn
-
-# my_morpion.game_end(@current_player)
-
-=begin
-my_morpion = Board.new
-my_morpion.show_board
-my_morpion.victory?
-=end
+my_morpion.game_end
+my_morpion.new_round
