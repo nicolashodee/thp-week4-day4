@@ -5,53 +5,75 @@ class Game
   #le status (en cours, nul ou un objet Player s'il gagne), 
   #le Board et un array contenant les 2 joueurs.
 
-  attr_accessor :current_player, :status, :board, :players
+  attr_accessor :current_player, :status, :board, :players, :number_of_turn
 
   def initialize
     #DONE : créé un array vide de joueurs, créé un board 
     #TO-DO :met le status à "on going", défini un current_player
     @players = []
     @board = Board.new
+    @current_player = current_player
+    @number_of_turn = 0
   end
 
-  def select_player
+  def ask_name
+    #DONE : demande leur nom au joueur et leur attribut un symbole
+    puts "Nom du premier joueur ?"
+    print "> "
+    player1_name = gets.chomp
+    player1 = Player.new(player1_name, "X")
+    @players << player1  
+    #idem pour le joueur 2
+    puts "Nom du deuxieme joueur ?"
+    print "> "
+    player2_name = gets.chomp
+    player2 = Player.new(player2_name, "Y")
+    @players << player2    
+  end
 
-  end 
+  def turn
+    #DONE : Elle affiche le plateau,
+    # tant qu'il n'y a pas de defaite 
+    while @board.victory? == false
+      # on circule dans l'array des players et c'est current_player qui joue
+      @players.each { |player| 
+        @board.show_board
+        @current_player = player
+        puts "Le joueur en cours est : #{@current_player.name}"
+        #demande au joueur ce qu'il joue
+        play_turn(@current_player)
+        #passe au joueur suivant si la partie n'est pas finie.
+        @number_of_turn += 1
+        puts "Nombre de tour : #{@number_of_turn}"
+        puts "La victoire est : #{@board.victory?}"
+    }
+    end  
+     
+  end
 
   def play_turn(player)
     #DONE: demande au joueur ce qu'il souhaite faire
-    puts "C'est à ton tour #{player.name}. Tu as le symbole '#{player.symbol}'entre la case que tu souhaites jouer (A1, B3, C1, etc)"
+    puts "C'est à ton tour #{player.name}. Tu as le symbole '#{player.symbol}' entre la case que tu souhaites jouer (A1, B3, C1, etc)"
     print "> "
-    case_choosen = gets.chomp
-    #DONE: change la BoardCase jouée en fonction de la valeur du joueur (X ou O)
-    @board_array.write_on_case(case_choisie.to_s, player.symbol)
+    case_choosen = gets.chomp    #DONE: change la BoardCase jouée en fonction de la valeur du joueur (X ou O)
+    @board.write_case(case_choosen, player.symbol)
   end
 
-  #une fonction perform qui execute toutes celles enoncees ci dessus 
-  def perform
-    ask_name #DONE: demande les noms des joueurs avec la fonction definie dans player.rb et les affiche ci dessous 
-    display_name #DONE: affiche les noms grace a la fonction definie dans player.rb
-    @board.show_board #DONE: affiche le tableau vide avec la fonction show_board definie dans board.rb
-    #TO DO: appeler une fonction victory? definie dans board.rb qui verifie qu'aucun joueur n'a gagné 
-      #TO DO: si oui, appeller une fonction select_player qui selectionne un joueur 
-      #TO DO: appeller la fonction play_turn pour le joueur selectionné (deja definie plus haut)
-  end
-
-
-
+  
   # Autres fonctions non definies pour l'instant 
-
-
-  def turn
-    #TO DO : méthode faisant appelle aux méthodes des autres classes (notamment à l'instance de Board). Elle affiche le plateau, demande au joueur ce qu'il joue, vérifie si un joueur a gagné, passe au joueur suivant si la partie n'est pas finie.
-  end
-
-  def game_end
-    # TO DO : permet l'affichage de fin de partie quand un vainqueur est détecté ou si il y a match nul
-  end    
-
   def new_round
     # TO DO : relance une partie en initialisant un nouveau board mais en gardant les mêmes joueurs.
   end
 
 end
+
+=begin
+def game_end(player)
+  # TO DO : permet l'affichage de fin de partie quand un vainqueur est détecté ou si il y a match nul
+  if @number_of_turn == 10
+    puts "Match nul ! Vous êtes des gros nazes !!!"
+  else
+    puts "#{@current_player.name} a gagné !!! T'es un champion !"
+  end
+end
+=end

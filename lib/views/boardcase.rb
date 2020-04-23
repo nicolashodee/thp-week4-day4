@@ -1,10 +1,11 @@
-class BoardCase
-  #TO DO : la classe a 2 attr_accessor, sa valeur en string (X, O, ou vide), ainsi que son identifiant de case
-  attr_accessor  :case_number, :value
+class BoardCase 
+  #DONE : la classe a 2 attr_accessor, sa valeur en string (X, O, ou vide), ainsi que son identifiant de case
+  attr_accessor  :case_number, :content
 
-  def initialize(case_number,value)
+  def initialize(case_number,content)
     @case_number = case_number
-    @value = value
+    @content = content
+
   end
 
 end 
